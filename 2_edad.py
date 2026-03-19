@@ -14,7 +14,7 @@ def cargar_datos():
     return df
 df=cargar_datos()
 
-
+## Riesgo por edad
 df_avg = df.groupby('Categoria de riesgo')['edad'].mean().reset_index()
 fig = px.bar(df_avg, x='Categoria de riesgo', y='edad', title='Edad Promedio por Categoría de Riesgo de Diabetes')
 st.plotly_chart(fig, width=800)
