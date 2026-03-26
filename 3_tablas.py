@@ -49,7 +49,18 @@ filtro_nivel_estres = st.slider("Selecciona el rango de nivel de estrés", float
 
 filtro_categoria_riesgo = st.multiselect("Selecciona la categoría de riesgo", ["Todos"] + df['Categoria de riesgo'].unique().tolist())
 
-df_busqueda = df.query("edad >= @filtro_Edad[0] and edad <= @filtro_Edad[1] and IMC >= @filtro_IMC[0] and IMC <= @filtro_IMC[1] and `Nivel de estres` >= @filtro_nivel_estres[0] and `Nivel de estres` <= @filtro_nivel_estres[1]"  + (" and Genero == @filtro_Genero" if filtro_Genero != "Todos" else ""+ " and `Nivel de actividad fisica` in @filtro_Actividad_fisica" if filtro_Actividad_fisica and "Todos" not in filtro_Actividad_fisica else "" + " and `Categoria de riesgo` in @filtro_categoria_riesgo" if filtro_categoria_riesgo and "Todos" not in filtro_categoria_riesgo else ""))
+#df_busqueda = df.query("edad >= @filtro_Edad[0] and edad <= @filtro_Edad[1] and IMC >= @filtro_IMC[0] and IMC <= @filtro_IMC[1] and `Nivel de estres` >= @filtro_nivel_estres[0] and `Nivel de estres` <= @filtro_nivel_estres[1]"  + (" and Genero == @filtro_Genero" if filtro_Genero != "Todos" else " + (" and `Nivel de actividad fisica` in @filtro_Actividad_fisica" if filtro_Actividad_fisica and "Todos" not in filtro_Actividad_fisica else " + (" and `Categoria de riesgo` in @filtro_categoria_riesgo" if filtro_categoria_riesgo and "Todos" not in filtro_categoria_riesgo else "")))
+
+query_1 = "edad >= @filtro_Edad[0] and edad <= @filtro_Edad[1] and IMC >= @filtro_IMC[0] and IMC <= @filtro_IMC[1] and `Nivel de estres` >= @filtro_nivel_estres[0] and `Nivel de estres` <= @filtro_nivel_estres[1]"
+if filtro_Genero != "Todos":
+    query_1 += " and Genero == @filtro_Genero"
+if filtro_Actividad_fisica and "Todos" not in filtro_Actividad_fisica:
+    query_1 += " and `Nivel de actividad fisica` in @filtro_Actividad_fisica"
+if filtro_categoria_riesgo and "Todos" not in filtro_categoria_riesgo:
+    query_1 += " and `Categoria de riesgo` in @filtro_categoria_riesgo"
+
+df_busqueda = df.query(query_1)
+
 
 st.dataframe(df_busqueda)
 ## Mostrar la tabla completa
