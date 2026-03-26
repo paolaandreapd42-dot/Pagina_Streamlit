@@ -74,3 +74,7 @@ st.header("Recomendaciones")
 
 st.write("""- Implementar programas de prevención enfocados en control del peso.
 - Promover chequeos de glucosa periódicos en población de riesgo.""")
+
+st.header("Conclusiones")
+
+st.write(""" - La diabetes es una enfermedad crónica que afecta la forma en que el cuerpo utiliza la glucosa. Existen diferentes tipos de diabetes, cada uno con características y tratamientos específicos.

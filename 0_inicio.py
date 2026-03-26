@@ -46,7 +46,3 @@ st.write("""- Analizar factores de riesgo asociados a la diabetes.
 """)
 ##Seccion de genero de los pacientes
 
-st.header("Conclusiones")
-
-st.write(""" - La diabetes es una enfermedad crónica que afecta la forma en que el cuerpo utiliza la glucosa. Existen diferentes tipos de diabetes, cada uno con características y tratamientos específicos.
-          - Las personas de 57 o más años tienen un alto riesgo de desarrollar diabetes y desde los 52 años pueden ser prediabeticos.""")

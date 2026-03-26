@@ -37,8 +37,21 @@ df['Categoria de riesgo'] = df['Categoria de riesgo'].replace({
         'Low Risk': 'Bajo riesgo',
         'High Risk': 'Alto riesgo'
     })
+filtro_Edad = st.slider("Selecciona el rango de edad", int(df['edad'].min()), int(df['edad'].max()), (int(df['edad'].min()), int(df['edad'].max())))
 
+filtro_Genero = st.selectbox("Selecciona el género", ["Todos"] + df['Genero'].unique().tolist())
+
+filtro_IMC = st.slider("Selecciona el rango de IMC", float(df['IMC'].min()), float(df['IMC'].max()), (float(df['IMC'].min()), float(df['IMC'].max())))
+
+filtro_Actividad_fisica =st.multiselect("Selecciona el nivel de actividad física", ["Todos"] + df['Nivel de actividad fisica'].unique().tolist())
+
+filtro_nivel_estres = st.slider("Selecciona el rango de nivel de estrés", float(df['Nivel de estres'].min()), float(df['Nivel de estres'].max()), (float(df['Nivel de estres'].min()), float(df['Nivel de estres'].max())))
+
+filtro_categoria_riesgo = st.multiselect("Selecciona la categoría de riesgo", ["Todos"] + df['Categoria de riesgo'].unique().tolist())
+
+df_busqueda = df.query("edad >= @filtro_Edad[0] and edad <= @filtro_Edad[1] and IMC >= @filtro_IMC[0] and IMC <= @filtro_IMC[1] and `Nivel de estres` >= @filtro_nivel_estres[0] and `Nivel de estres` <= @filtro_nivel_estres[1]"  + (" and Genero == @filtro_Genero" if filtro_Genero != "Todos" else ""+ " and `Nivel de actividad fisica` in @filtro_Actividad_fisica" if filtro_Actividad_fisica and "Todos" not in filtro_Actividad_fisica else "" + " and `Categoria de riesgo` in @filtro_categoria_riesgo" if filtro_categoria_riesgo and "Todos" not in filtro_categoria_riesgo else ""))
+
+st.dataframe(df_busqueda)
 ## Mostrar la tabla completa
-st.dataframe(df)
 
 
