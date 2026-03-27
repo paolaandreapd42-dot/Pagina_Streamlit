@@ -33,11 +33,18 @@ columns_to_plot = ["edad", "IMC", "Presión Arterial", "Glucosa en ayunas", "Niv
 # Ajuste lineal: y = m*x + b
 m, b = np.polyfit(df["IMC"], df["Puntuacion de riesgo"], 1)
 
-# Crear figura con puntos
+# Crear figura con puntos coloreados por nivel de riesgo
 fig = go.Figure(data=go.Scatter(
     x=df["IMC"], 
     y=df["Puntuacion de riesgo"], 
     mode='markers',
+    marker=dict(
+        color=df["Puntuacion de riesgo"], 
+        colorscale="Viridis", 
+        size=8, 
+        opacity=0.6,
+        colorbar=dict(title="Riesgo")
+    ),
     name="Datos"
 ))
 
@@ -45,16 +52,39 @@ fig = go.Figure(data=go.Scatter(
 fig.add_trace(go.Scatter(
     x=[df["IMC"].min(), df["IMC"].max()],
     y=[m*df["IMC"].min()+b, m*df["IMC"].max()+b],
-    line=dict(color='red'),
+    line=dict(color='red', dash='dash'),
     name="Tendencia"
 ))
 
+# Líneas de referencia para rangos de IMC (OMS)
+rangos_imc = {
+    "Bajo peso": 18.5,
+    "Normal": 25,
+    "Sobrepeso": 30
+}
+
+for rango, valor in rangos_imc.items():
+    fig.add_shape(
+        type="line",
+        x0=valor, x1=valor,
+        y0=df["Puntuacion de riesgo"].min(), y1=df["Puntuacion de riesgo"].max(),
+        line=dict(color="gray", dash="dot"),
+    )
+    fig.add_annotation(
+        x=valor, y=df["Puntuacion de riesgo"].max(),
+        text=rango,
+        showarrow=False,
+        yshift=10,
+        font=dict(color="gray")
+    )
+
+# Layout
 fig.update_layout(
     title="Relación Médica: IMC vs Puntuación de Riesgo",
     xaxis_title="IMC",
-    yaxis_title="Puntuación de Riesgo"
+    yaxis_title="Puntuación de Riesgo",
+    template="plotly_white"
 )
 
-st.plotly_chart(fig, width=800)
-
+st.plotly_chart(fig, use_container_width=True)
 
