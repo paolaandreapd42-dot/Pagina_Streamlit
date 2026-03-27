@@ -17,6 +17,7 @@ st.sidebar.header("La diabetes no siempre se siente, pero siempre cuenta. Cada d
 st.markdown("<h1 style='color:blue;'>Predicción de la Diabetes</h1>", unsafe_allow_html=True)
 ##st.write("La diabetes es una condición crónica que afecta la forma en que el cuerpo utiliza la glucosa, su principal fuente de energía. Existen diferentes tipos de diabetes, y cada uno requiere cuidados especiales para mantener una buena calidad de vida. El objetivo de esta página es brindar información básica, fomentar la conciencia sobre la importancia de la prevención y promover hábitos saludables que ayuden a controlar la enfermedad.")
 
+
 # 🔷 DESCRIPCIÓN EN CAJA VISUAL
 st.markdown("""
 <div style="
