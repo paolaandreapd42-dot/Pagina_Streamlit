@@ -14,6 +14,8 @@ def cargar_datos():
     return df
 df=cargar_datos()
 
+st.markdown("<h1 style='color:blue;'>Calculadora de Riesgo de Diabetes</h1>", unsafe_allow_html=True)   
+st.write("""En esta sección se puede calcular el riesgo de desarrollar diabetes, según sus resultados de examanes médicos, asi como los factores de riesgo y prevalencia de diabetes en la familia.""")
 ## funcion riesgo
 def calcular_riesgo(edad, imc, glucosa, presion_arterial, insulina, actividad_fisica):
       riesgo = 0
