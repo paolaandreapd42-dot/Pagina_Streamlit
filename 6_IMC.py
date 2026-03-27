@@ -6,6 +6,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 
+st.markdown("<h1 style='color:blue;'>Distribución del Índice de Masa Corporal (IMC)</h1>", unsafe_allow_html=True)
+st.write("""Mapa de calor que ilustra cómo se distribuyen los valores de IMC en la muestra, facilitando la identificación de zonas con mayor prevalencia de sobrepeso u obesidad.”
+""")
+
  #cargar dataset
 def cargar_datos():
     df = pd.read_csv('diabetes_risk_dataset.csv')
