@@ -4,7 +4,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
 
-st.title("Análisis de Riesgo de Diabetes")
+
+st.markdown("<h1 style='color:blue;'>Análisis de Riesgo de Diabetes</h1>", unsafe_allow_html=True)
 
 st.write("""Este proyecto analiza un dataset de factores de riesgo de diabetes
 como edad, IMC, presión arterial y glucosa para identificar patrones
